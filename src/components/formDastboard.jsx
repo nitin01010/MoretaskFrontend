@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import UserList from './userList';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const FormDastboard = () => {
     const [tabStatus, setTabStatus] = useState(false);
@@ -57,7 +58,7 @@ const FormDastboard = () => {
                 const apiUrl = 'https://morestakq1.onrender.com/api/v1/users'; // Replace with your API endpoint
                 const response = await axios.post(apiUrl, formData);
 
-                console.log('Form data submitted successfully:', response.data);
+                toast.success('Form data submitted successfully');
 
                 // Reset form data after successful submission
                 setFormData({
@@ -70,7 +71,7 @@ const FormDastboard = () => {
                 });
 
             } catch (error) {
-                console.error('Error submitting form data:', error);
+                toast.error('Error submitting form data:', error);
                 // Handle error (e.g., show error message to the user)
             }
 

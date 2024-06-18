@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Trash } from 'lucide-react';
 
+import { toast } from 'react-toastify';
+
 const UserList = () => {
     const [users, setUsers] = useState([]);
 
@@ -11,7 +13,7 @@ const UserList = () => {
                 const response = await axios.get("https://morestakq1.onrender.com/api/v1/users");
                 setUsers(response.data.users);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                toast.error("Error fetching data:", error);
             }
         };
 
@@ -22,10 +24,10 @@ const UserList = () => {
         console.log(id);
         axios.post(`https://morestakq1.onrender.com/api/v1/users/delete`, { id })
             .then(response => {
-                console.log(`Item with ID ${id} successfully deleted`);
+                toast.success(`Item with ID ${id} successfully deleted`);
             })
             .catch(error => {
-                console.error('Error deleting item:', error);
+                toast.error('Error deleting item:', error);
             });
     };
     return (
